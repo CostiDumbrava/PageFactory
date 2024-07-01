@@ -3,3 +3,5 @@
 .settings/
 bin/
 credentials.properties
+poze/
+logs/

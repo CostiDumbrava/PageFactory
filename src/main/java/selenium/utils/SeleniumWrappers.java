@@ -38,40 +38,44 @@ public class SeleniumWrappers extends BaseTest { //extinde BaseTest pentru a ave
 	 */
 	
 	public void click(WebElement element) { //clasa By se importa
-		
+		Log.info("called method <click> on element" + element);
 		try {
 			WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+			Log.info("called <Wait> for visibilityOf on element" +element);
 			wait.until(ExpectedConditions.visibilityOf(element));
 			//WebElement element = driver.findElement(locator);
 			element.click();
+			Log.info("<click> performed on element" +element);
 			
 		}catch(NoSuchElementException e) {
-			
+			Log.error("catch in <click> with error" +e.getMessage());
 			
 		}
 	}
    public void sendKeys(WebElement element, String text) {
-	   
-
+	    
+	   Log.info("called method <sendKeys> on element" + element);
 		try {
 			WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.visibilityOf(element));
 			//WebElement element = driver.findElement(locator);
+			Log.info("called method <clear> on element" +element);
 			element.clear();
 			element.sendKeys(text);
+			Log.info("called method <sendKeys> on element" +element);
 			
 		}catch(NoSuchElementException e) {
-			
+			Log.error("catch in <sendKeys> with error" +e.getMessage());
 			
 		}
 	   
    }
    
-   public String getElementText(By locator) {
+   public String getElementText(WebElement element) {
 	   
 	    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-	    return driver.findElement(locator).getText();
+		wait.until(ExpectedConditions.visibilityOf(element));
+	    return element.getText();
    }
    public void hoverElement(By locator) {
 	 

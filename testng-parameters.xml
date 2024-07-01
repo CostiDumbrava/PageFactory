@@ -3,7 +3,7 @@
 	<parameter name = "appUrl" value="https://keyfood.ro" />
     <test name="test" >
         <classes>
-            <class name="tests.LoginTest" ></class>  
+            <class name="tests.ContactFormTest" ></class>  
         </classes>
     </test>   
 </suite>

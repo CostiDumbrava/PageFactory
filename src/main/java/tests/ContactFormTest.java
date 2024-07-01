@@ -2,12 +2,16 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import page.objects.ContactPage;
 import page.objects.MenuPage;
 import selenium.utils.BaseTest;
+import selenium.utils.TestNGListener;
 
+
+@Listeners(TestNGListener.class)
 public class ContactFormTest extends BaseTest{
 	
 	@Test(priority=1)

@@ -19,9 +19,9 @@ import org.testng.annotations.Parameters;
 
 import com.google.common.io.Files;
 
-public class BaseTest {
+public class BaseTest extends Driver{
 	
-public static WebDriver driver; //l am facut static pentru a avea un singur obiect, altfel cand s a facut mostenirea se pierde 
+public WebDriver driver; //l am facut static pentru a avea un singur obiect, altfel cand s a facut mostenirea se pierde 
 
 public JavascriptExecutor jse;
 
@@ -34,11 +34,13 @@ public JavascriptExecutor jse;
 	*/
 
 
-    @Parameters({"appUrl"})
-	@BeforeMethod
-	public void setup(String URL) throws InterruptedException {
+    @Parameters({"appUrl", "browser"})
+	@BeforeClass
+	public void setup(String URL, String browser) throws InterruptedException {
 		
-		driver = new ChromeDriver();
+		//driver = new ChromeDriver();
+    	
+    	driver = initDriver(browser);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // se adauga in Base Test si nu in @Test pentru ca e o actiune generala
 		//driver.get("https://keybooks.ro");
@@ -46,13 +48,13 @@ public JavascriptExecutor jse;
 		driver.get(URL);
 	}
 	
-	@AfterMethod
+	@AfterClass
 	public void tearDown() throws InterruptedException {
 		Thread.sleep(5000); //pauza de 5sec executiei, este bad practice in testarea automata
 		driver.quit();	
 	}
 	
-	@AfterMethod   //ruleaza dupa fiecare test case @Test  
+	@AfterClass   //ruleaza dupa fiecare test case @Test  
 	public void recordFailure(ITestResult result) {
 		
 		//va face printscreen dupa fiecare methoda care este failed
